@@ -1,0 +1,26 @@
+{
+    "name": "jasny/formbuilder-angularjs",
+    "description": "AngularJS decorator for Jasny Form builder",
+    "keywords": ["forms", "angularjs"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arnold Daniels",
+            "email": "arnold@jasny.net",
+            "homepage": "http://www.jasny.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/jasny/formbuilder-bootstrap/issues",
+        "source": "https://github.com/jasny/formbuilder-bootstrap"
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "jasny/formbuilder": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Jasny\\FormBuilder\\AngularJS": "src/"
+        }
+    }
+}
