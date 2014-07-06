@@ -26,8 +26,8 @@ class AngularJS extends Decorator
     {
         if ($element instanceof Control) {
             if (!isset($element->attr['ng-model'])) $element->attr['ng-model'] = \Closure::bind(function() {
-                $ctrl = preg_replace('/^.*\s+as\s+/', '', $this->getOption('controller'));
-                return (isset($ctrl) ? $ctrl . '.' : '') . $this->getName();
+                $model = $this->getOption('model');
+                return ($model ? $model . '.' : '') . $this->getName();
             }, $element);
         }
     }
@@ -39,6 +39,6 @@ class AngularJS extends Decorator
      */
     public static function register()
     {
-        FormBuilder::$decorators['angularjs'] = ['Jasny\FormBuilder\AngularJS'];
+        FormBuilder::$decorators['angularjs'] = 'Jasny\FormBuilder\AngularJS';
     }
 }
