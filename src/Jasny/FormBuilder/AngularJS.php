@@ -15,6 +15,10 @@ use Jasny\FormBuilder;
  */
 class AngularJS extends Decorator
 {
+    /**
+     * Apply to all decendants
+     * @var boolean
+     */
     protected $deep = true;
     
     /**
@@ -24,6 +28,10 @@ class AngularJS extends Decorator
      */
     public function apply($element)
     {
+        if ($element instanceof Form && !isset($element->attr['novalidate'])) {
+            $element->attr['novalidate'] = true;
+        }
+        
         if ($element instanceof Control) {
             if (!isset($element->attr['ng-model'])) $element->attr['ng-model'] = \Closure::bind(function() {
                 $model = $this->getOption('model');
