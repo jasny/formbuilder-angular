@@ -5,21 +5,37 @@ namespace Jasny\FormBuilder;
 use Jasny\FormBuilder;
 
 /**
- * Render element for use with AngularJS.
- * Optionaly use features from Jasny AngularJS.
+ * Modify controls to work with AngularJS.
  * 
  * @link http://getbootstrap.com
  * @link http://jasny.github.io/bootstrap
  * 
- * @option int version  Which major AngularJS version is used
+ * @option boolean omit-name-attr Remove auto-defined name attributes
  */
-class AngularJS extends Decorator
+class Angular extends Decorator
 {
+    /**
+     * Remove auto-defined name attributes
+     * @var boolean
+     */
+    protected $omitNameAttr = false;
+    
     /**
      * Apply to all decendants
      * @var boolean
      */
     protected $deep = true;
+    
+    
+    /**
+     * Class constructor
+     * 
+     * @param array $options
+     */
+    public function __construct(array $options=[])
+    {
+        $this->omitNameAttr = !empty($options['omit-name-attr']);
+    }
     
     /**
      * Apply default modifications.
@@ -34,9 +50,13 @@ class AngularJS extends Decorator
         
         if ($element instanceof Control) {
             if (!isset($element->attr['ng-model'])) $element->attr['ng-model'] = \Closure::bind(function() {
-                $model = $this->getOption('model');
+                $model = $this->getOption('ng-model');
                 return ($model ? $model . '.' : '') . $this->getName();
             }, $element);
+            
+            if ($this->omitNameAttr && $element->attr['name'] instanceof \Closure) {
+                unset($element->attr['name']);
+            }
         }
     }
     
@@ -47,6 +67,6 @@ class AngularJS extends Decorator
      */
     public static function register()
     {
-        FormBuilder::$decorators['angularjs'] = 'Jasny\FormBuilder\AngularJS';
+        FormBuilder::$decorators['angular'] = 'Jasny\FormBuilder\Angular';
     }
 }

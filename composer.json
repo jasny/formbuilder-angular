@@ -1,5 +1,5 @@
 {
-    "name": "jasny/formbuilder-angularjs",
+    "name": "jasny/formbuilder-angular",
     "description": "AngularJS decorator for Jasny Form builder",
     "keywords": ["forms", "angularjs"],
     "license": "MIT",
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Jasny\\FormBuilder\\AngularJS": "src/"
+            "Jasny\\FormBuilder\\Angular": "src/"
         }
     }
 }
